@@ -1,0 +1,70 @@
+import { StyleSheet } from "react-native";
+import { colors } from "../../theme";
+
+export default StyleSheet.create({
+  screen: { flex: 1, backgroundColor: "#F4F6F8" },
+  menuRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 16,
+  },
+  signOut: {
+    fontSize: 12,
+    fontWeight: "600",
+    color: colors.grayText,
+  },
+  menuIcon: { fontSize: 18, color: colors.grayText },
+  greeting: { fontSize: 14, marginBottom: 4 },
+  greetingHello: { color: colors.greenDark, fontWeight: "600" },
+  greetingName: { color: colors.darkText, fontWeight: "700" },
+  title: {
+    color: colors.greenDark,
+    fontWeight: "800",
+    fontSize: 24,
+    marginBottom: 16,
+  },
+  searchBar: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 8,
+    backgroundColor: colors.grayPill,
+    borderRadius: 999,
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+    marginBottom: 20,
+  },
+  searchIcon: { fontSize: 14 },
+  searchInput: { flex: 1, fontSize: 14, color: colors.darkText, padding: 0 },
+  listContent: { gap: 16, paddingBottom: 8 },
+  emptyState: {
+    color: colors.grayTextLight,
+    fontSize: 14,
+    textAlign: "center",
+    marginTop: 32,
+  },
+  card: {
+    backgroundColor: "#fff",
+    borderRadius: 16,
+    overflow: "hidden",
+    marginBottom: 16,
+  },
+  image: {
+    height: 96,
+    backgroundColor: "#064e3b",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  imageIcon: { fontSize: 22 },
+  body: { padding: 12 },
+  name: { fontWeight: "700", fontSize: 14, color: colors.darkText, marginBottom: 2 },
+  meta: { fontSize: 12, color: colors.grayText, marginBottom: 2 },
+  metaLast: { marginBottom: 6 },
+  footer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  footerText: { fontSize: 12, color: colors.grayText },
+  price: { fontWeight: "700", color: colors.darkText, fontSize: 12 },
+});

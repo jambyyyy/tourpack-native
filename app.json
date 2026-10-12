@@ -1,0 +1,41 @@
+{
+  "expo": {
+    "name": "TourPack",
+    "slug": "tourpack-native",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/icon.png",
+    "userInterfaceStyle": "light",
+    "plugins": [
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/images/splash-icon.png",
+          "resizeMode": "contain",
+          "backgroundColor": "#F4F6F8"
+        }
+      ]
+    ],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "android": {
+      "package": "com.tourpack.app",
+      "versionCode": 1,
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "backgroundColor": "#059669"
+      },
+      "backgroundColor": "#F4F6F8"
+    },
+    "web": {
+      "favicon": "./assets/images/favicon.png"
+    },
+    "backgroundColor": "#F4F6F8",
+    "extra": {
+      "eas": {
+        "projectId": "44cb055e-bcdc-4c5d-8bf2-6d1ff24058f3"
+      }
+    }
+  }
+}
