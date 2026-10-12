@@ -6,18 +6,19 @@ interface GuideDashboardProps {
   user: AppUser | null;
   onSignOut: () => void;
   onOpenPackages: () => void;
+  onOpenBookings: () => void;
 }
 
-export default function GuideDashboard({ user, onSignOut, onOpenPackages }: GuideDashboardProps) {
+export default function GuideDashboard({
+  user,
+  onSignOut,
+  onOpenPackages,
+  onOpenBookings,
+}: GuideDashboardProps) {
   function comingSoon() {
     Alert.alert("Coming soon", "This section isn't built yet.");
   }
 
-  // Guides register with an accreditation number/body (see SignUp) and
-  // start out "pending_verification" until an admin confirms them from
-  // the Admin Dashboard's "Confirm guide" action. Until then, the Manage
-  // tools stay locked so an unverified guide can't list packages or take
-  // bookings.
   const status = user?.status;
   const isPending = status === "pending_verification";
   const isRejected = status === "rejected";
@@ -28,7 +29,7 @@ export default function GuideDashboard({ user, onSignOut, onOpenPackages }: Guid
       isRejected ? "Accreditation not approved" : "Pending verification",
       isRejected
         ? "Your guide accreditation wasn't approved. Contact support if you think this is a mistake."
-        : "Your account is still waiting on accreditation review. This usually doesn't take long — check back soon."
+        : "Your account is still waiting on accreditation review. This usually doesn't take long — check back soon.",
     );
   }
 
@@ -58,7 +59,9 @@ export default function GuideDashboard({ user, onSignOut, onOpenPackages }: Guid
       )}
       {isRejected && (
         <View style={[styles.statusBanner, styles.statusBannerRejected]}>
-          <Text style={[styles.statusBannerText, styles.statusBannerTextRejected]}>
+          <Text
+            style={[styles.statusBannerText, styles.statusBannerTextRejected]}
+          >
             ⚠ Your guide accreditation wasn't approved. Contact support for
             details.
           </Text>
@@ -70,21 +73,27 @@ export default function GuideDashboard({ user, onSignOut, onOpenPackages }: Guid
         style={[styles.row, isLocked && styles.rowLocked]}
         onPress={isLocked ? lockedTap : onOpenPackages}
       >
-        <Text style={[styles.rowLabel, isLocked && styles.rowLabelLocked]}>My Packages</Text>
+        <Text style={[styles.rowLabel, isLocked && styles.rowLabelLocked]}>
+          My Packages
+        </Text>
+        <Text style={styles.rowArrow}>{isLocked ? "🔒" : "→"}</Text>
+      </Pressable>
+      <Pressable
+        style={[styles.row, isLocked && styles.rowLocked]}
+        onPress={isLocked ? lockedTap : onOpenBookings}
+      >
+        <Text style={[styles.rowLabel, isLocked && styles.rowLabelLocked]}>
+          Booking Requests
+        </Text>
         <Text style={styles.rowArrow}>{isLocked ? "🔒" : "→"}</Text>
       </Pressable>
       <Pressable
         style={[styles.row, isLocked && styles.rowLocked]}
         onPress={isLocked ? lockedTap : comingSoon}
       >
-        <Text style={[styles.rowLabel, isLocked && styles.rowLabelLocked]}>Booking Requests</Text>
-        <Text style={styles.rowArrow}>{isLocked ? "🔒" : "→"}</Text>
-      </Pressable>
-      <Pressable
-        style={[styles.row, isLocked && styles.rowLocked]}
-        onPress={isLocked ? lockedTap : comingSoon}
-      >
-        <Text style={[styles.rowLabel, isLocked && styles.rowLabelLocked]}>Earnings</Text>
+        <Text style={[styles.rowLabel, isLocked && styles.rowLabelLocked]}>
+          Earnings
+        </Text>
         <Text style={styles.rowArrow}>{isLocked ? "🔒" : "→"}</Text>
       </Pressable>
     </View>

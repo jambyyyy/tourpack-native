@@ -2,6 +2,8 @@ export type Role = "guide" | "tourist" | "admin";
 
 export type GuideStatus = "pending_verification" | "verified" | "rejected";
 
+export type BookingStatus = "pending" | "confirmed" | "declined";
+
 export interface AppUser {
   uid: string;
   email: string | null;
@@ -35,4 +37,22 @@ export interface GuideApplicant {
   licenseImageUrl: string;
   status: GuideStatus;
   createdAt: string;
+}
+
+export interface Booking {
+  id: string;
+  packageId: string;
+  packageName: string;
+  packageDate: string;
+  guideId: string;
+  guideName: string | null;
+  touristId: string;
+  touristName: string | null;
+  touristEmail: string | null;
+  guests: number;
+  pricePerPax: number;
+  total: number;
+  notes: string;
+  status: BookingStatus;
+  createdAt: number;
 }

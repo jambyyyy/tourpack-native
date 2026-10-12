@@ -13,6 +13,9 @@ import ExplorerDashboard from "./src/components/tourist/ExplorerDashboard";
 import GuideDashboard from "./src/components/guide/GuideDashboard";
 import MyPackages from "./src/components/guide/MyPackages";
 import PackageDetails from "./src/components/tourist/PackageDetails";
+import BookPackage from "./src/components/tourist/BookPackage";
+import MyBookings from "./src/components/tourist/MyBookings";
+import BookingRequests from "./src/components/guide/BookingRequests";
 import AdminDashboard from "./src/components/admin/AdminDashboard";
 import styles from "./App.styles";
 import { colors } from "./src/theme";
@@ -72,7 +75,9 @@ function AppContent() {
 
   function handleSignUp(newUser) {
     setUser(newUser);
-    setScreen(newUser.role === "guide" ? screenFor("guide", newUser.status) : "signin");
+    setScreen(
+      newUser.role === "guide" ? screenFor("guide", newUser.status) : "signin",
+    );
   }
 
   async function handleSignIn(loginInfo) {
@@ -97,12 +102,21 @@ function AppContent() {
   if (checkingAuth) {
     return (
       <View style={[styles.root, bg]}>
-        <SafeAreaView style={[styles.safe, bg, { alignItems: "center", justifyContent: "center" }]}>
+        <SafeAreaView
+          style={[
+            styles.safe,
+            bg,
+            { alignItems: "center", justifyContent: "center" },
+          ]}
+        >
           <ActivityIndicator size="large" color={colors.green} />
         </SafeAreaView>
       </View>
     );
   }
+
+  const isTourist = user?.role === "tourist";
+  const isVerifiedGuide = user?.role === "guide" && user?.status === "verified";
 
   return (
     <View style={[styles.root, bg]}>
@@ -110,7 +124,10 @@ function AppContent() {
         <StatusBar style="dark" />
         <View style={[styles.card, bg]}>
           {screen === "signup" && (
-            <SignUp onSignUp={handleSignUp} goToSignIn={() => setScreen("signin")} />
+            <SignUp
+              onSignUp={handleSignUp}
+              goToSignIn={() => setScreen("signin")}
+            />
           )}
           {screen === "signin" && (
             <SignIn
@@ -120,7 +137,10 @@ function AppContent() {
             />
           )}
           {screen === "adminSignin" && (
-            <AdminSignIn onSignIn={handleSignIn} goBack={() => setScreen("signin")} />
+            <AdminSignIn
+              onSignIn={handleSignIn}
+              goBack={() => setScreen("signin")}
+            />
           )}
           {screen === "pendingApproval" && user?.role === "guide" && (
             <PendingApproval
@@ -137,20 +157,46 @@ function AppContent() {
                 setSelectedPackage(pkg);
                 setScreen("packageDetails");
               }}
+              onOpenBookings={() => setScreen("myBookings")}
             />
           )}
           {screen === "packageDetails" && selectedPackage && (
-            <PackageDetails pkg={selectedPackage} goBack={() => setScreen("dashboard")} />
+            <PackageDetails
+              pkg={selectedPackage}
+              goBack={() => setScreen("dashboard")}
+              onBook={() => setScreen("bookPackage")}
+            />
           )}
-          {screen === "guideDashboard" && user?.status === "verified" && (
+          {screen === "bookPackage" && selectedPackage && isTourist && (
+            <BookPackage
+              user={user}
+              pkg={selectedPackage}
+              goBack={() => setScreen("packageDetails")}
+              onBooked={() => setScreen("myBookings")}
+            />
+          )}
+          {screen === "myBookings" && isTourist && (
+            <MyBookings user={user} goBack={() => setScreen("dashboard")} />
+          )}
+          {screen === "guideDashboard" && isVerifiedGuide && (
             <GuideDashboard
               user={user}
               onSignOut={handleSignOut}
               onOpenPackages={() => setScreen("myPackages")}
+              onOpenBookings={() => setScreen("bookingRequests")}
             />
           )}
-          {screen === "myPackages" && user?.status === "verified" && (
-            <MyPackages user={user} goBack={() => setScreen("guideDashboard")} />
+          {screen === "myPackages" && isVerifiedGuide && (
+            <MyPackages
+              user={user}
+              goBack={() => setScreen("guideDashboard")}
+            />
+          )}
+          {screen === "bookingRequests" && isVerifiedGuide && (
+            <BookingRequests
+              user={user}
+              goBack={() => setScreen("guideDashboard")}
+            />
           )}
           {screen === "adminDashboard" && user?.role === "admin" && (
             <AdminDashboard user={user} onSignOut={handleSignOut} />

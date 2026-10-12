@@ -4,7 +4,12 @@ import { colors } from "../../theme";
 export default StyleSheet.create({
   screen: { flex: 1, backgroundColor: "#F4F6F8" },
   content: { paddingBottom: 32 },
-  back: { fontSize: 13, fontWeight: "600", color: colors.grayText, marginBottom: 12 },
+  back: {
+    fontSize: 13,
+    fontWeight: "600",
+    color: colors.grayText,
+    marginBottom: 12,
+  },
   hero: { width: "100%", height: 180, borderRadius: 16, marginBottom: 16 },
   heroPlaceholder: {
     backgroundColor: "#064e3b",
@@ -12,9 +17,19 @@ export default StyleSheet.create({
     justifyContent: "center",
   },
   heroIcon: { fontSize: 28 },
-  name: { fontSize: 22, fontWeight: "800", color: colors.greenDark, marginBottom: 4 },
+  name: {
+    fontSize: 22,
+    fontWeight: "800",
+    color: colors.greenDark,
+    marginBottom: 4,
+  },
   meta: { fontSize: 13, color: colors.grayText, marginBottom: 16 },
-  guideRow: { flexDirection: "row", alignItems: "center", gap: 12, marginBottom: 12 },
+  guideRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 12,
+    marginBottom: 12,
+  },
   avatar: {
     width: 44,
     height: 44,
@@ -56,7 +71,12 @@ export default StyleSheet.create({
     borderBottomColor: "#E5E7EB",
   },
   lastRow: { borderBottomWidth: 0 },
-  itTime: { width: 72, fontSize: 13, fontWeight: "700", color: colors.darkText },
+  itTime: {
+    width: 72,
+    fontSize: 13,
+    fontWeight: "700",
+    color: colors.darkText,
+  },
   itActivity: { flex: 1, fontSize: 13, color: colors.darkText },
   bookWrap: { marginTop: 4 },
 });
